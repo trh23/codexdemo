@@ -7,12 +7,22 @@ if 'test_examples' not in st.session_state:
     st.session_state['test_examples'] = {
         0: {'id': 0,'display': 'Select an example', 'prompt': '', 'test':''},
         1: {'id': 1, 'display': '# Code golf # implement a python function for fizz buzz def fizz_buzz(n):',
-            'prompt': '# Code golf\n# implement a python function for fizz buzz\ndef fizz_buzz(n):', 'test': ''},
+            'prompt': '# implement a python function for fizz buzz\ndef fizz_buzz(n):', 'test': ''},
         2: {'id': 2, 'display': '# Code golf # For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.\n# Empty sum should be equal to 0 and empty product should be equal to 1. def sum_product(numbers: List[int]) -> Tuple[int, int]:',
-            'prompt': "# language: Python\n# code golf\n# write a function that returns a tuple consisting of a sum and a product of all the integers in a list.\nfrom typing import List, Tuple\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:",
-            'test': "METADATA = {\n    'author': 'jt',\n    'dataset': 'test'\n}\n\n\ndef check(sum_product):\n    assert sum_product([1, 1, 1]) == (3, 1)\n    assert sum_product([100, 0]) == (100, 0)\n    assert sum_product([3, 5, 7]) == (3 + 5 + 7, 3 * 5 * 7)\n    assert sum_product([10]) == (10, 10)\n\ncheck(sum_product)"}
-
-
+            'prompt': "# language: Python\n# write a function that returns a tuple consisting of a sum and a product of all the integers in a list.\nfrom typing import List, Tuple\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:",
+            'test': "METADATA = {\n    'author': 'jt',\n    'dataset': 'test'\n}\n\n\ndef check(sum_product):\n    assert sum_product([1, 1, 1]) == (3, 1)\n    assert sum_product([100, 0]) == (100, 0)\n    assert sum_product([3, 5, 7]) == (3 + 5 + 7, 3 * 5 * 7)\n    assert sum_product([10]) == (10, 10)\n\ncheck(sum_product)"},
+        3: {'id': 3, 'display': "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n",
+            'prompt': "# language: Python\nfrom typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n",
+            'test': "METADATA = {\n    'author': 'jt',\n    'dataset': 'test'\n}\n\n\ndef check(candidate):\n    assert candidate([1.0, 2.0, 3.9, 4.0, 5.0, 2.2], 0.3) == True\n    assert candidate([1.0, 2.0, 3.9, 4.0, 5.0, 2.2], 0.05) == False\n    assert candidate([1.0, 2.0, 5.9, 4.0, 5.0], 0.95) == True\n    assert candidate([1.0, 2.0, 5.9, 4.0, 5.0], 0.8) == False\n    assert candidate([1.0, 2.0, 3.0, 4.0, 5.0, 2.0], 0.1) == True\n    assert candidate([1.1, 2.2, 3.1, 4.1, 5.1], 1.0) == True\n    assert candidate([1.1, 2.2, 3.1, 4.1, 5.1], 0.5) == False\ncheck(has_close_elements)\n"},
+        4: {'id':4, 'display': "from typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    >>> separate_paren_groups('( ) (( )) (( )( ))')\n    ['()', '(())', '(()())']\n    \"\"\"\n",
+            'prompt': "# language: Python\nfrom typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    >>> separate_paren_groups('( ) (( )) (( )( ))')\n    ['()', '(())', '(()())']\n    \"\"\"\n",
+            'test': "METADATA = {\n    'author': 'jt',\n    'dataset': 'test'\n}\n\n\ndef check(separate_paren_groups):\n    assert separate_paren_groups('(()()) ((())) () ((())()())') == [\n        '(()())', '((()))', '()', '((())()())'\n    ]\n    assert separate_paren_groups('() (()) ((())) (((())))') == [\n        '()', '(())', '((()))', '(((())))'\n    ]\n    assert separate_paren_groups('(()(())((())))') == [\n        '(()(())((())))'\n    ]\n    assert separate_paren_groups('( ) (( )) (( )( ))') == ['()', '(())', '(()())']\n\ncheck(separate_paren_groups)"},
+        5: {'id':5, 'display': "\n\ndef truncate_number(number: float) -> float:\n    \"\"\" Given a positive floating point number, it can be decomposed into\n    and integer part (largest integer smaller than given number) and decimals\n    (leftover part always smaller than 1).\n\n    Return the decimal part of the number.\n    >>> truncate_number(3.5)\n    0.5\n    \"\"\"\n",
+            'prompt': "# language: Python\ndef truncate_number(number: float) -> float:\n    \"\"\" Given a positive floating point number, it can be decomposed into\n    and integer part (largest integer smaller than given number) and decimals\n    (leftover part always smaller than 1).\n\n    Return the decimal part of the number.\n    >>> truncate_number(3.5)\n    0.5\n    \"\"\"\n",
+            'test': "METADATA = {\n    'author': 'jt',\n    'dataset': 'test'\n}\n\n\ndef check(truncate_number):\n    assert truncate_number(3.5) == 0.5\n    assert abs(truncate_number(1.33) - 0.33) < 1e-6\n    assert abs(truncate_number(123.456) - 0.456) < 1e-6\n\ncheck(truncate_number)"},
+        6: {'id':6, 'display': "\n\ndef string_sequence(n: int) -> str:\n    \"\"\" Return a string containing space-delimited numbers starting from 0 upto n inclusive.\n    >>> string_sequence(0)\n    '0'\n    >>> string_sequence(5)\n    '0 1 2 3 4 5'\n    \"\"\"\n",
+            'prompt': "# language: Python\ndef string_sequence(n: int) -> str:\n    \"\"\" Return a string containing space-delimited numbers starting from 0 upto n inclusive.\n    >>> string_sequence(0)\n    '0'\n    >>> string_sequence(5)\n    '0 1 2 3 4 5'\n    \"\"\"\n",
+            'test': "METADATA = {\n    'author': 'jt',\n    'dataset': 'test'\n}\n\n\ndef check(string_sequence):\n    assert string_sequence(0) == '0'\n    assert string_sequence(3) == '0 1 2 3'\n    assert string_sequence(10) == '0 1 2 3 4 5 6 7 8 9 10'\n\ncheck(string_sequence)"}
     }
 if 'codex_prompt' not in st.session_state:
     st.session_state['codex_prompt'] = ''
@@ -34,6 +44,8 @@ if 'codex_length' not in st.session_state:
     st.session_state['codex_length'] = None
 if 'codegeex_length' not in st.session_state:
     st.session_state['codegeex_length'] = None
+if 'code_golf' not in st.session_state:
+    st.session_state['code_golf'] = True
 
 st.set_page_config(
     page_title="Gode Golf: Codex VS CodeGeeX",
@@ -43,6 +55,8 @@ st.set_page_config(
 def generate_test_codex(codex_prompt, codex_test, codegeex_prompt, codegeex_test, col1, col2):
     # codex generation
     if codex_prompt.strip() != "":
+        if st.session_state['code_golf']:
+            codex_prompt = "# Code golf\n" + codex_prompt
         codex_generation = generate_one_completion_request(codex_prompt)
         codex_display = codex_prompt + "\n" + codex_generation
         st.session_state['codex_display'] = codex_display
@@ -53,6 +67,8 @@ def generate_test_codex(codex_prompt, codex_test, codegeex_prompt, codegeex_test
 
     # codegeex generation
     if codegeex_prompt.strip() != "":
+        if st.session_state['code_golf']:
+            codegeex_prompt = "# Code golf\n" + codegeex_prompt
         codegeex_generation = generate_codegeex_more_lines(codegeex_prompt, 3)
         codegeex_display = codegeex_prompt + "\n" + codegeex_generation
         st.session_state['codegeex_display'] = codegeex_display
@@ -75,10 +91,12 @@ def change_code_input():
     # st.session_state['codex_display'] = ''
     # st.session_state['codegeex_display'] = ''
 
-
-
+def change_code_golf():
+    st.session_state['code_golf'] = not st.session_state['code_golf']
 
 st.title('Gode Golf: Codex VS CodeGeeX')
+
+st.checkbox('Code Golf', True, on_change=change_code_golf)
 
 col1, col2 = st.columns(2, gap="large")
 
@@ -131,7 +149,7 @@ with col6:
 
 codex_length = st.session_state['codex_length']
 codegeex_length = st.session_state['codegeex_length']
-if codex_length is not None and codegeex_length is not None:
+if st.session_state['code_golf'] and codex_length is not None and codegeex_length is not None:
     # st.caption("Code Golf Result")
     col7, col8 = st.columns(2, gap="large")
     difference = codex_length - codegeex_length
@@ -141,12 +159,12 @@ if codex_length is not None and codegeex_length is not None:
     with col7:
         col7.metric(label="chars", value=codex_length, delta=difference, delta_color='inverse')
         if codex_win:
-            col7.success("Win!", icon="✅")
+            col7.success("Win Code Golf!", icon="✅")
 
     with col8:
         col8.metric(label="chars", value=codegeex_length)
         if not codex_win:
-            col8.success("Win!", icon="✅")
+            col8.success("Win Code Golf!", icon="✅")
 
 
 
@@ -157,8 +175,3 @@ for item in st.session_state['test_examples'].values():
     else:
         test_prompts.append(str(item['id']) + '. ' + item['display'])
 st.selectbox("Example Inputs", test_prompts, key='example_select', on_change=change_code_input)
-
-example_code = "def find_the_difference(self, s: str, t: str) -> str:\n    \"\"\"Given two strings s and t.\n    String t is generated by random shuffling string s and then add one more letter at a random position.\n    Return the letter that was added to t\"\"\"\n"
-sample = "    c = 0\n    for cs in s:\n        c ^= ord(cs)\n    for ct in t:\n        c ^= ord(ct)\n    return chr(c)"
-st.code(example_code + sample, language="python")
-st.code("from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n", language='python')

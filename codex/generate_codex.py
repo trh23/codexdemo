@@ -1,6 +1,6 @@
 from functools import reduce
 from typing import List, Tuple
-
+import streamlit as st
 import requests
 from codegeex.generate_codegeex import cleanup_code
 
@@ -16,7 +16,7 @@ def generate_one_completion_request(code_promt):
 
     x = requests.post(url,
       headers={'Content-Type':'application/json',
-               'Authorization': 'Bearer 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'},
+               'Authorization': 'Bearer ' + st.secrets['CODEX']},
                 json=myobj)
 
     stop_sequences = ['\nclass', '\ndef', '\n#', '\nif', '\nprint']
