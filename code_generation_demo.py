@@ -65,6 +65,8 @@ def generate_test_codex(codex_prompt, codex_test, codegeex_prompt, codegeex_test
         if codex_test.strip() != "":
             result = entry_point(sample_file=codex_display, test_script=codex_test)
             st.session_state['codex_result'] = result
+        else:
+            st.session_state['codex_result'] = ""
 
     # codegeex generation
     if codegeex_prompt.strip() != "":
@@ -79,6 +81,8 @@ def generate_test_codex(codex_prompt, codex_test, codegeex_prompt, codegeex_test
         if codegeex_test.strip() != "":
             result = entry_point(sample_file=codegeex_display, test_script=codegeex_test)
             st.session_state['codegeex_result'] = result
+        else:
+            st.session_state['codegeex_result'] = ""
 
 def change_code_input():
     example_select = st.session_state['example_select']
