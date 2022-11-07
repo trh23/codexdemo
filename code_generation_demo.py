@@ -57,7 +57,8 @@ def generate_test_codex(codex_prompt, codex_test, codegeex_prompt, codegeex_test
     if codex_prompt.strip() != "":
         if st.session_state['code_golf']:
             codex_prompt = "# Code golf\n" + codex_prompt
-        codex_generation = generate_one_completion_request(codex_prompt)
+        model_name = 'code-davinci-002'
+        codex_generation = generate_one_completion_request(codex_prompt, model_name)
         codex_display = codex_prompt + "\n" + codex_generation
         st.session_state['codex_display'] = codex_display
         st.session_state['codex_length'] = len(codex_generation)
@@ -69,7 +70,9 @@ def generate_test_codex(codex_prompt, codex_test, codegeex_prompt, codegeex_test
     if codegeex_prompt.strip() != "":
         if st.session_state['code_golf']:
             codegeex_prompt = "# Code golf\n" + codegeex_prompt
-        codegeex_generation = generate_codegeex_more_lines(codegeex_prompt, 3)
+        # codegeex_generation = generate_codegeex_more_lines(codegeex_prompt, 3)
+        model_name = 'code-cushman-001'
+        codegeex_generation = generate_one_completion_request(codegeex_prompt, model_name)
         codegeex_display = codegeex_prompt + "\n" + codegeex_generation
         st.session_state['codegeex_display'] = codegeex_display
         st.session_state['codegeex_length'] = len(codegeex_generation)
@@ -88,13 +91,13 @@ def change_code_input():
     st.session_state['codex_test'] = test
     st.session_state['codegeex_prompt'] = prompt
     st.session_state['codegeex_test'] = test
-    # st.session_state['codex_display'] = ''
-    # st.session_state['codegeex_display'] = ''
+
 
 def change_code_golf():
     st.session_state['code_golf'] = not st.session_state['code_golf']
 
-st.title('Gode Golf: Codex VS CodeGeeX')
+# st.title('Gode Golf: Codex VS CodeGeeX')
+st.title('Gode Golf: codex-cushman VS codex-davinci')
 
 st.checkbox('Code Golf', True, on_change=change_code_golf)
 
@@ -102,13 +105,13 @@ col1, col2 = st.columns(2, gap="large")
 
 
 with col1:
-    col1.caption("Codex")
+    col1.caption("davinci model")
     codex_prompt = st.text_area('Input', value=st.session_state['codex_prompt'], key='col1.codex_prompt')
     codex_test = st.text_area('Test Script', value=st.session_state['codex_test'], key='col1.codex_test')
 
 
 with col2:
-    col2.caption("CodeGeeX")
+    col2.caption("cushman model")
     codegeex_prompt = st.text_area('Input', value=st.session_state['codegeex_prompt'], key='col2.codegeex_prompt')
     codegeex_test = st.text_area('Test Script', value=st.session_state['codegeex_test'], key='col2.codegeex_test')
 

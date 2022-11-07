@@ -4,13 +4,13 @@ import streamlit as st
 import requests
 from codegeex.generate_codegeex import cleanup_code
 
-def generate_one_completion_request(code_promt):
+def generate_one_completion_request(code_promt, model_name):
     url = 'https://api.openai.com/v1/completions'
-    myobj = {      'model': "code-davinci-002",
+    myobj = {      'model': model_name,
       'prompt': code_promt,
       'temperature': 0.8,
       'top_p': 0.95,
-      'max_tokens': 2000,
+      'max_tokens': 1024,
 #       stop = ['\nclass', '\ndef', '\n#', '\nif', '\nprint'],
       'n': 1}
 
