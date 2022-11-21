@@ -55,11 +55,14 @@ st.set_page_config(
 def generate_test_codex(codex_prompt, codex_test, codegeex_prompt, codegeex_test, col1, col2):
     # codex generation
     if codex_prompt.strip() != "":
+        input = ""
         if st.session_state['code_golf']:
             codex_prompt = "# Code golf\n" + codex_prompt
-
+            input = codex_prompt
+        else:
+            input = "# verbose code\n" + codex_prompt
         model_name = 'code-davinci-002'
-        codex_generation = generate_one_completion_request(codex_prompt, model_name)
+        codex_generation = generate_one_completion_request(input, model_name)
         codex_display = codex_prompt + "\n" + codex_generation
         st.session_state['codex_display'] = codex_display
         st.session_state['codex_length'] = len(codex_generation)
@@ -71,11 +74,15 @@ def generate_test_codex(codex_prompt, codex_test, codegeex_prompt, codegeex_test
 
     # codegeex generation
     if codegeex_prompt.strip() != "":
+        input = ""
         if st.session_state['code_golf']:
             codegeex_prompt = "# Code golf\n" + codegeex_prompt
+            input = codegeex_prompt
+        else:
+            input = "# verbose code\n" + codegeex_prompt
         # codegeex_generation = generate_codegeex_more_lines(codegeex_prompt, 3)
         model_name = 'code-cushman-001'
-        codegeex_generation = generate_one_completion_request(codegeex_prompt, model_name)
+        codegeex_generation = generate_one_completion_request(input, model_name)
         codegeex_display = codegeex_prompt + "\n" + codegeex_generation
         st.session_state['codegeex_display'] = codegeex_display
         st.session_state['codegeex_length'] = len(codegeex_generation)
