@@ -60,7 +60,7 @@ def generate_test_codex(codex_prompt, codex_test, codegeex_prompt, codegeex_test
             codex_prompt = "# Code golf\n" + codex_prompt
             input = codex_prompt
         else:
-            input = "# verbose code\n" + codex_prompt
+            input = "#verbose code\n" + codex_prompt
         model_name = 'code-davinci-002'
         codex_generation = generate_one_completion_request(input, model_name)
         codex_display = codex_prompt + "\n" + codex_generation
@@ -79,7 +79,7 @@ def generate_test_codex(codex_prompt, codex_test, codegeex_prompt, codegeex_test
             codegeex_prompt = "# Code golf\n" + codegeex_prompt
             input = codegeex_prompt
         else:
-            input = "# verbose code\n" + codegeex_prompt
+            input = "#verbose code\n" + codegeex_prompt
         # codegeex_generation = generate_codegeex_more_lines(codegeex_prompt, 3)
         model_name = 'code-cushman-001'
         codegeex_generation = generate_one_completion_request(input, model_name)
