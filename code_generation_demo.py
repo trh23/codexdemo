@@ -57,6 +57,7 @@ def generate_test_codex(codex_prompt, codex_test, codegeex_prompt, codegeex_test
     if codex_prompt.strip() != "":
         if st.session_state['code_golf']:
             codex_prompt = "# Code golf\n" + codex_prompt
+
         model_name = 'code-davinci-002'
         codex_generation = generate_one_completion_request(codex_prompt, model_name)
         codex_display = codex_prompt + "\n" + codex_generation
@@ -86,15 +87,14 @@ def generate_test_codex(codex_prompt, codex_test, codegeex_prompt, codegeex_test
 
 def change_code_input():
     example_select = st.session_state['example_select']
-    if not example_select[0].isnumeric:
-        pass
-    id = int(example_select.split('.')[0])
-    prompt = st.session_state['test_examples'][id]['prompt']
-    test = st.session_state['test_examples'][id]['test']
-    st.session_state['codex_prompt'] = prompt
-    st.session_state['codex_test'] = test
-    st.session_state['codegeex_prompt'] = prompt
-    st.session_state['codegeex_test'] = test
+    if example_select[0].isnumeric():
+        id = int(example_select.split('.')[0])
+        prompt = st.session_state['test_examples'][id]['prompt']
+        test = st.session_state['test_examples'][id]['test']
+        st.session_state['codex_prompt'] = prompt
+        st.session_state['codex_test'] = test
+        st.session_state['codegeex_prompt'] = prompt
+        st.session_state['codegeex_test'] = test
 
 
 def change_code_golf():

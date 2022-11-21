@@ -13,7 +13,6 @@ def generate_one_completion_request(code_promt, model_name):
       'max_tokens': 1024,
 #       stop = ['\nclass', '\ndef', '\n#', '\nif', '\nprint'],
       'n': 1}
-
     x = requests.post(url,
       headers={'Content-Type':'application/json',
                'Authorization': 'Bearer ' + st.secrets['CODEX']},
@@ -41,13 +40,4 @@ def generate_one_completion_request(code_promt, model_name):
     else:
         return ""
 
-def sum_product(numbers: List[int]) -> Tuple[int, int]:
 
-    sum = reduce(lambda a, b : a + b, numbers)
-    product = reduce(lambda a, b: a * b, numbers)
-    return sum, product
-
-
-
-if __name__ == '__main__':
-    print(sum_product([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
