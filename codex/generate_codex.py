@@ -8,7 +8,7 @@ def generate_one_completion_request(code_promt, model_name):
     url = 'https://api.openai.com/v1/completions'
     myobj = {      'model': model_name,
       'prompt': code_promt,
-      'temperature': 0.8,
+      'temperature': 0.7,
       'top_p': 0.95,
       'max_tokens': 1024,
 #       stop = ['\nclass', '\ndef', '\n#', '\nif', '\nprint'],
